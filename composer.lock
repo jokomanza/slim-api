@@ -4,8 +4,65 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2e68383073ddd759795a5ab0256aecf",
+    "content-hash": "a67c2aa5e058cb68d47ebf274f0d2b12",
     "packages": [
+        {
+            "name": "alsvanzelf/jsonapi",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lode/jsonapi.git",
+                "reference": "6afd836108e331954187173acd5ff61c66b5e9ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lode/jsonapi/zipball/6afd836108e331954187173acd5ff61c66b5e9ef",
+                "reference": "6afd836108e331954187173acd5ff61c66b5e9ef",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7|^6.5|^7.5|^8.5|^9.4",
+                "psr/http-message": "^1.0"
+            },
+            "suggest": {
+                "psr/http-message": "Allows constructing requests from Psr RequestInterface"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "alsvanzelf\\jsonapi\\": "src/",
+                    "alsvanzelf\\jsonapiTests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lode Claassen",
+                    "email": "lode@alsvanzelf.nl",
+                    "homepage": "https://www.lodeclaassen.nl/"
+                }
+            ],
+            "description": "Human-friendly library to implement JSON:API without needing to know the specification.",
+            "homepage": "https://github.com/lode/jsonapi",
+            "keywords": [
+                "JSON-API",
+                "api",
+                "json",
+                "jsonapi"
+            ],
+            "support": {
+                "issues": "https://github.com/lode/jsonapi/issues",
+                "source": "https://github.com/lode/jsonapi/tree/v2.3.0"
+            },
+            "time": "2021-08-23T20:14:41+00:00"
+        },
         {
             "name": "nannehuiges/jsend",
             "version": "v3.0.0",
