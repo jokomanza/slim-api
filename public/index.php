@@ -26,7 +26,7 @@ $config = [
 $app = new \Slim\App($config);
 
 $app->get('/', function(Request $req, Response $res) {
-    throw new RuntimeException('example error');
+    # throw new RuntimeException('example error');
     return $res->withJson(['status' => true], StatusCode::HTTP_ACCEPTED);
 });
 
