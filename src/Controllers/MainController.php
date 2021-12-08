@@ -43,7 +43,7 @@ class MainController
         $document->addMeta('autors', [
             'Joko Supriyanto'
         ]);
-        $document->addLink('self', (string) $request->getUri());
+        $document->setSelfLink((string) $request->getUri());
 
 
         return $response->withJson($document);

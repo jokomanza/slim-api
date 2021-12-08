@@ -2,7 +2,9 @@
     "require": {
         "slim/slim": "3.*",
         "nannehuiges/jsend": "3.*",
-        "alsvanzelf/jsonapi": "^2.3"
+        "alsvanzelf/jsonapi": "^2.3",
+        "symfony/dotenv": "^5.4",
+        "illuminate/database": "^8.75"
     },
     "autoload": {
         "psr-4": {
