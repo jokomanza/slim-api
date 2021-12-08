@@ -1,5 +1,11 @@
 {
     "require": {
-        "slim/slim": "3.*"
+        "slim/slim": "3.*",
+        "nannehuiges/jsend": "3.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
     }
 }

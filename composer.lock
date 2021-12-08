@@ -4,8 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43c43a01c7335350cbbdbb77a20f1ce6",
+    "content-hash": "f2e68383073ddd759795a5ab0256aecf",
     "packages": [
+        {
+            "name": "nannehuiges/jsend",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/NanneHuiges/JSend.git",
+                "reference": "62ea244ecd09e0e2be35c79cab384dc86ced7e00"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/NanneHuiges/JSend/zipball/62ea244ecd09e0e2be35c79cab384dc86ced7e00",
+                "reference": "62ea244ecd09e0e2be35c79cab384dc86ced7e00",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JSend": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nanne Huiges",
+                    "email": "nanne@huiges.nl",
+                    "role": "Current maintainer"
+                }
+            ],
+            "description": "A simple PHP implementation of the JSend specification.",
+            "homepage": "https://github.com/NanneHuiges/jsend",
+            "keywords": [
+                "jsend",
+                "json",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/NanneHuiges/JSend/issues",
+                "source": "https://github.com/NanneHuiges/JSend/tree/master"
+            },
+            "time": "2018-07-11T08:08:23+00:00"
+        },
         {
             "name": "nikic/fast-route",
             "version": "v1.3.0",

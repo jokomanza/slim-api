@@ -23,12 +23,11 @@ $config = [
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
     ],
 ];
+
 $app = new \Slim\App($config);
 
-$app->get('/', function(Request $req, Response $res) {
-    # throw new RuntimeException('example error');
-    return $res->withJson(['status' => true], StatusCode::HTTP_ACCEPTED);
-});
 
+// Register routes
+require __DIR__ . '/../src/routes.php';
 
 $app->run();
