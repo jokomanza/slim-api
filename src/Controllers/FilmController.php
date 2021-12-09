@@ -7,7 +7,10 @@ use alsvanzelf\jsonapi\ErrorsDocument;
 use alsvanzelf\jsonapi\objects\ErrorObject;
 use alsvanzelf\jsonapi\objects\ResourceObject;
 use alsvanzelf\jsonapi\ResourceDocument;
+use App\Models\Actor;
+use App\Models\Film;
 use Exception;
+use Illuminate\Database\Capsule\Manager;
 use Illuminate\Database\QueryException;
 use JSend\JSendResponse;
 use PDO;
@@ -15,7 +18,7 @@ use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class HandlingController
+class FilmController
 {
 
     protected $container;
@@ -31,7 +34,7 @@ class HandlingController
     }
 
     // Get Student List
-    public function getArea(Request $request, Response $response, $args)
+    public function getCountry(Request $request, Response $response, $args)
     {
         $areas = [
             [
@@ -154,17 +157,17 @@ class HandlingController
             // var_dump($item);
             // die;
             $film = new ResourceDocument('film', $item->film_id);
-            foreach($item as $key => $data) {
+            foreach ($item as $key => $data) {
                 $film->add($key, $data);
             }
 
             $film_id = $item->film_id;
             $actors = $db->query("SELECT a.actor_id, a.first_name, a.last_name FROM film_actor fa, actor a WHERE fa.actor_id = a.actor_id AND fa.film_id = $film_id ORDER BY film_id")->fetchAll(PDO::FETCH_OBJ);
-            
+
             // var_dump($actors);
             // die;
             $actors_data = [];
-            foreach($actors as $actor) {
+            foreach ($actors as $actor) {
                 $data = ResourceDocument::fromObject($actor, 'actor', $actor->actor_id);
                 $actor_url = $this->container->get('router')->pathFor('actor_detail', ['actor_id' => $actor->actor_id]);
                 // dump($request->getUri()->withPath('')->withQuery('')->withFragment('') . $actor_url);
@@ -217,7 +220,7 @@ class HandlingController
             // var_dump($item);
             // die;
             $county = new ResourceDocument('actor', $item->actor_id);
-            foreach($item as $key => $data) {
+            foreach ($item as $key => $data) {
                 $county->add($key, $data);
             }
             $document->addResource($county);
@@ -232,38 +235,29 @@ class HandlingController
         return $response->withJson($document);
     }
 
-    // Get Student List
+    /**
+     * Get actor detail
+     * 
+     * @return Request
+     */
     public function getActorDetail(Request $request, Response $response, $args)
     {
         $this->db->beginTransaction();
         // $this->db->commit();
         $this->db->rollBack();
 
-        $actor_id = (int) $args['actor_id'];
+        $actors = (new Actor)->get($args['actor_id']);
 
-        $url = (string) $request->getUri()->withQuery('');
-
-        $stmt = $this->db->query("SELECT * FROM actor WHERE actor_id = $actor_id");
-
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-        $document = new CollectionDocument();
-
-        foreach ($result as $item) {
-            // var_dump($item);
-            // die;
+        $document = createCollectionDocument($request);
+        foreach ($actors as $item) {
             $county = new ResourceDocument('actor', $item->actor_id);
-            foreach($item as $key => $data) {
+            foreach ($item as $key => $data) {
                 $county->add($key, $data);
             }
             $document->addResource($county);
         }
 
-        $execution_time = (microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"]) * 1000;
-        $document->addMeta('processing_time', "$execution_time milliseconds");
-        $document->addMeta('processing_time_ms', $execution_time);
-        $document->setSelfLink((string) $request->getUri()->withQuery(''));
-        $document->unsetJsonapiObject();
+        $document->addMeta('message', 'Success getting actor detail');
 
         return $response->withJson($document);
     }

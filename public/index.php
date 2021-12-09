@@ -4,6 +4,7 @@ use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\StatusCode;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -30,12 +31,15 @@ $app = new \Slim\App($settings);
 // Register routes
 require __DIR__ . '/../src/routes.php';
 
+// Register utils
+require __DIR__ . '/../src/Utils/Util.php';
+
 // GET DI Container
 $container = $app->getContainer();
 
 $container['db'] = function ($c) {
     $db = $c['settings']['db'];
-    $pdo = new PDO('pgsql:host=' . $db['host'] . ';dbname=' . $db['dbname'],
+    $pdo = new PDO('pgsql:host=' . $db['host'] . ';dbname=' . $db['database'],
         $db['username'], $db['password']);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
@@ -44,5 +48,16 @@ $container['db'] = function ($c) {
 
 // Start DB connection
 $container->get('db');
+
+$capsule = new Capsule();
+
+$capsule->addConnection($container->get('settings')['db']);
+
+// Make this Capsule instance available globally via static methods... (optional)
+$capsule->setAsGlobal();
+
+// Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+$capsule->bootEloquent();
+$container['db2'] = $capsule;
 
 $app->run();

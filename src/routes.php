@@ -9,7 +9,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\StatusCode;
 
-$handlingRoutes = require_once __DIR__ . '/Routes/HandlingRoutes.php';
+$handlingRoutes = require_once __DIR__ . '/Routes/FilmRoutes.php';
 
 $container = $app->getContainer();
 
